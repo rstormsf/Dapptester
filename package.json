@@ -1,0 +1,22 @@
+{
+  "name": "init",
+  "version": "0.1.0",
+  "homepage": "https://rstormsf.github.io/Dapptester",
+  "private": true,
+  "dependencies": {
+    "gh-pages": "^1.1.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1",
+    "web3": "^1.0.0-beta.30"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -o origin"
+
+  }
+}
