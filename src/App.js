@@ -82,7 +82,7 @@ class App extends Component {
   async onClickBatch(e) {
     e.preventDefault()
     const cb = (e) => {
-      console.log(e,arguments, 'ZPIDA')
+      console.log(e,arguments, 'callback from batch tx')
     }
     let web3 = new Web3(this.state.web3Config.web3Instance.currentProvider)
     const contract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
@@ -99,21 +99,21 @@ class App extends Component {
       to: CONTRACT_ADDRESS,
       gas: web3.utils.toHex(gas),
       gasPrice: web3.utils.toHex(web3.utils.toWei('1.01', 'gwei'))
-    })
+    }, cb.bind(this, 'first'))
     const tx2 = web3.eth.sendTransaction.request({
       from: this.state.web3Config.defaultAccount,
       data,
       to: CONTRACT_ADDRESS,
       gas: web3.utils.toHex(gas),
       gasPrice: web3.utils.toHex(web3.utils.toWei('2.02', 'gwei'))
-    }, cb)
+    }, cb.bind(this, 'second'))
     const tx3 = web3.eth.sendTransaction.request({
       from: this.state.web3Config.defaultAccount,
       data,
       to: CONTRACT_ADDRESS,
       gas: web3.utils.toHex(gas),
       gasPrice: web3.utils.toHex(web3.utils.toWei('3.03', 'gwei'))
-    }, cb)
+    }, cb.bind(this, 'third'))
     batch.add(tx2);
     batch.add(tx3);
     batch.add(tx1);
@@ -132,7 +132,6 @@ class App extends Component {
   }
   render() {
     console.log(this.state)
-    console.log('hello world!')
     return (
       <div className="App">
         <header className="App-header">
